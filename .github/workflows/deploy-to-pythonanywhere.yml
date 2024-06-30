@@ -36,7 +36,7 @@ jobs:
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
       with:
         host: 'www.pythonanywhere.com'
-        username: "tuimorsala"
-        api-token: "c2883a6622046b5a3dec767645ebade0dbc631cf"
-        domain-name: "tuimorsala.pythonanywhere.com"
+        username: USERNAME
+        api-token: PA_API_TOKEN
+        domain-name: DOMAIN_NAME
         
