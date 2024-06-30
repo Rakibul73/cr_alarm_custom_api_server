@@ -10,17 +10,10 @@ text = None
 
 @app.route('/git_update', methods=['POST'])
 def git_update():
-    """
-    Update the git repository with the latest changes from the remote and switch to the main branch.
-    
-    Parameters:
-        None
-    
-    Returns:
-        tuple: A tuple in the format (None, 200) indicating a successful update.
-    """
     repo = git.Repo('./cr_alarm_custom_api_server')
     origin = repo.remotes.origin
+    # Stash local changes
+    repo.git.stash()
     # repo.create_head('main', origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
     origin.pull()
     return '', 200
