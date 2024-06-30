@@ -21,31 +21,6 @@ jobs:
         python -m pip install --upgrade pip
       # pip install -r requirements.txt  # If you have a requirements.txt file
 
-    - name: Install requests library
-      run: python -m pip install requests
-
-    - name: Fetch CPU quota info from PythonAnywhere
-      run: |
-        python - <<EOF
-        import requests
-
-        username = '${{ secrets.USERNAME }}'
-        token = '${{ secrets.PA_API_TOKEN }}'  # Assuming PA_API_TOKEN is stored in GitHub Secrets
-
-        response = requests.get(
-            f'https://www.pythonanywhere.com/api/v0/user/{username}/cpu/',
-            headers={'Authorization': f'Token {token}'}
-        )
-
-        if response.status_code == 200:
-            print('CPU quota info:')
-            print(response.content)
-        else:
-            print(f'Got unexpected status code {response.status_code}: {response.content!r}')
-        EOF
-      env:
-        PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}  # Injecting PA_API_TOKEN as an environment variable
-
   
     - name: Countdown before reload
       run: |
