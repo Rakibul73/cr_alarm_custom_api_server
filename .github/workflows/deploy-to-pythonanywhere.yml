@@ -31,10 +31,12 @@ jobs:
     - name: Reload pythonanywhere webapp
       uses: jensvog/pythonanywhere-webapp-reload-action@v1
       env:
-          PA_USERNAME: ${{ secrets.PA_USERNAME }}
           PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
+          USERNAME: ${{ secrets.USERNAME }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
       with:
-        host: eu.pythonanywhere.com
-        username: tuimorsala
+        host: 'eu.pythonanywhere.com'
+        username: USERNAME
         api-token: PA_API_TOKEN
-        domain-name: tuimorsala.pythonanywhere.com
+        domain-name: DOMAIN_NAME
+        
