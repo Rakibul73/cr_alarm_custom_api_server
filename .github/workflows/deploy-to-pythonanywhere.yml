@@ -29,7 +29,7 @@ jobs:
         done
     
     - name: Reload pythonanywhere webapp
-    - uses: jensvog/pythonanywhere-webapp-reload-action@v1
+      uses: jensvog/pythonanywhere-webapp-reload-action@v1
       env:
           PA_USERNAME: ${{ secrets.PA_USERNAME }}
           PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
