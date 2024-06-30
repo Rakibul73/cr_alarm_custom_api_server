@@ -31,7 +31,7 @@ def git_update():
 
 @app.route('/')
 def hello_world():
-    return 'Hello from Flask! it is hosted in pythonanywhere'
+    return 'This is Custom API Server for CR-Alarm & CR-Alarm-Admin | Hosted in Pythonanywhere'
 
 @app.route("/get_timestamp", methods=["GET"])
 def get_timestamp():
