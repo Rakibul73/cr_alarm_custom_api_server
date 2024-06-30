@@ -1,0 +1,43 @@
+name: Deploy to PythonAnywhere
+
+on:
+  push:
+    branches:
+      - main  # or your default branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11.0'  # Specify the Python version you're using
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # If you have a requirements.txt file
+
+    - name: Deploy to PythonAnywhere
+      env:
+        PA_USERNAME: ${{ secrets.PA_USERNAME }}
+        PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
+      run: |
+        git push https://$PA_USERNAME:$PA_API_TOKEN@ssh.pythonanywhere.com/home/$PA_USERNAME/$PA_USERNAME.pythonanywhere.com HEAD:main -f
+        curl -v -X POST \
+          -H "Authorization: Token $PA_API_TOKEN" \
+          https://www.pythonanywhere.com/api/v0/user/$PA_USERNAME/webapps/$PA_USERNAME.pythonanywhere.com/reload/
+    
+    
+    - uses: jensvog/pythonanywhere-webapp-reload-action@v1
+      env:
+          PA_USERNAME: ${{ secrets.PA_USERNAME }}
+          PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
+      with:
+        host: eu.pythonanywhere.com
+        username: tuimorsala
+        api-token: PA_API_TOKEN
+        domain-name: tuimorsala.pythonanywhere.com
